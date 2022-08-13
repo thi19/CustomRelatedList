@@ -1,0 +1,7 @@
+<design:component label="Custom Related AB"> 
+    <design:attribute name="tableSize" label="Table Size"/> 
+    <design:attribute name="objectTypeB" label="Object API Name B" />
+    <design:attribute name="parentFieldNameB" label="Parent Field API Name B"/>
+    <design:attribute name="objectTypeC" label="Object API Name C" />  
+    <design:attribute name="parentFieldNameC" label="Parent Field API Name C"/>  
+</design:component>

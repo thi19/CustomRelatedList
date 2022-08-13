@@ -1,0 +1,52 @@
+<aura:component description="Custom Related List" implements="flexipage:availableForAllPageTypes,force:hasRecordId" controller="CustomRelatedListController">
+    <aura:attribute name="objectTypeB" type="String"/> 
+    <aura:attribute name="objectTypeC" type="String"/>   
+    <aura:attribute name="recordId" type="String"/> 
+    <aura:attribute name="parentFieldNameB" type="String"/> 
+    <aura:attribute name="parentFieldNameC" type="String"/>  
+    <aura:attribute name="columns" type="List"/> 
+    <aura:attribute name="tableSize" type="integer"/> 
+    <aura:attribute name="data" type="List" access="global"/>   
+    <aura:attribute name="page" type="integer"/>   
+    <aura:attribute name="pages" type="integer"/>
+    <aura:attribute name="total" type="integer"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="force:showToast" action="{!c.handleApplicationEvent}"/> 
+    <aura:attribute name="spinner" type="boolean" default="false"/>  
+
+    <lightning:card title="Custom Related List (Object B and C)" iconName="standard:solution">  
+        <div class="slds-m-around_small"> 
+            <aura:if isTrue="{!not(empty(v.data))}" > 
+                <lightning:datatable data="{! v.data }"
+                                     columns="{! v.columns }"
+                                     keyField="id"   
+                                     hideCheckboxColumn="true"
+                                     onrowaction="{! c.handleRowAction }"/> 
+                
+                <div class="button-container">
+                    <lightning:button disabled="{!v.page == 1}" variant="base" label="Previous Page" onclick="{! c.navigate }" />
+                        {!v.page} / {!v.pages}
+                    <lightning:button disabled="{!v.page == v.pages}" aura:id="previousPage" variant="base" label="Next Page" onclick="{! c.navigate }" />
+                </div> 
+              
+            </aura:if>
+
+    <aura:if isTrue="{!v.spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading...</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+            
+
+            <aura:if isTrue="{!empty(v.data)}" > 
+                <p>Please fill component attributes.</p>
+            </aura:if>
+        </div>
+    </lightning:card>
+
+    
+</aura:component>
